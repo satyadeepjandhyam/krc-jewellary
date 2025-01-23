@@ -1,0 +1,154 @@
+{{>header}}
+<title>Edit Diamond Product</title>
+<style>
+    .table-editable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-editable th, .table-editable td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .table-editable th {
+        background-color: black;
+        color: white;
+    }
+
+    .product-image {
+        max-width: 100px;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 10px; /* Add spacing below the image */
+        display: block; /* Ensure it behaves as a block element */
+    }
+
+    .btn-save, .btn-back {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 10px;
+    }
+</style>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header" style="background-color: black; color: white;">
+            <h4><b>Edit Diamond Product</b></h4>
+        </div>
+        <div class="card-body">
+            <form action="/auth/updateDiamondProduct/{{product._id}}" method="POST" enctype="multipart/form-data">
+                <table class="table-editable">
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Image</td>
+                        <td>
+                            <img src="/../{{product.image}}" alt="Product Image" class="product-image">
+                            <input type="file" name="image" accept="image/*">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>
+                            <input type="text" name="name" value="{{product.name}}" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Metal</td>
+                        <td>
+                            <select name="metal" required>
+                                <option value="Gold" {{#ifEquals product.metal "Gold"}}selected{{/ifEquals}}>Gold</option>
+                                <option value="Platinum" {{#ifEquals product.metal "Platinum"}}selected{{/ifEquals}}>Platinum</option>
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Price</td>
+                        <td>
+                            <input type="number" name="price" value="{{product.price}}" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Diamond Quality</td>
+                        <td>
+                            <select name="diamondQuality" required>
+                                <option value="Excellent" {{#ifEquals product.diamondQuality "Excellent"}}selected{{/ifEquals}}>Excellent</option>
+                                <option value="Very Good" {{#ifEquals product.diamondQuality "Very Good"}}selected{{/ifEquals}}>Very Good</option>
+                                <option value="Good" {{#ifEquals product.diamondQuality "Good"}}selected{{/ifEquals}}>Good</option>
+                                <option value="Fair" {{#ifEquals product.diamondQuality "Fair"}}selected{{/ifEquals}}>Fair</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Carat</td>
+                        <td>
+                            <input type="number" name="carat" value="{{product.carat}}" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cut</td>
+                        <td>
+                            <select name="cut" required>
+                                <option value="Round" {{#ifEquals product.cut "Round"}}selected{{/ifEquals}}>Round</option>
+                                <option value="Princess" {{#ifEquals product.cut "Princess"}}selected{{/ifEquals}}>Princess</option>
+                                <option value="Emerald" {{#ifEquals product.cut "Emerald"}}selected{{/ifEquals}}>Emerald</option>
+                                <option value="Asscher" {{#ifEquals product.cut "Asscher"}}selected{{/ifEquals}}>Asscher</option>
+                                <option value="Cushion" {{#ifEquals product.cut "Cushion"}}selected{{/ifEquals}}>Cushion</option>
+                                <option value="Oval" {{#ifEquals product.cut "Oval"}}selected{{/ifEquals}}>Oval</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td>
+                            <select name="color" required>
+                                <option value="D" {{#ifEquals product.color "D"}}selected{{/ifEquals}}>D</option>
+                                <option value="E" {{#ifEquals product.color "E"}}selected{{/ifEquals}}>E</option>
+                                <option value="F" {{#ifEquals product.color "F"}}selected{{/ifEquals}}>F</option>
+                                <option value="G" {{#ifEquals product.color "G"}}selected{{/ifEquals}}>G</option>
+                                <option value="H" {{#ifEquals product.color "H"}}selected{{/ifEquals}}>H</option>
+                                <option value="I" {{#ifEquals product.color "I"}}selected{{/ifEquals}}>I</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Clarity</td>
+                        <td>
+                            <select name="clarity" required>
+                                <option value="IF" {{#ifEquals product.clarity "IF"}}selected{{/ifEquals}}>IF</option>
+                                <option value="VVS1" {{#ifEquals product.clarity "VVS1"}}selected{{/ifEquals}}>VVS1</option>
+                                <option value="VVS2" {{#ifEquals product.clarity "VVS2"}}selected{{/ifEquals}}>VVS2</option>
+                                <option value="VS1" {{#ifEquals product.clarity "VS1"}}selected{{/ifEquals}}>VS1</option>
+                                <option value="VS2" {{#ifEquals product.clarity "VS2"}}selected{{/ifEquals}}>VS2</option>
+                                <option value="SI1" {{#ifEquals product.clarity "SI1"}}selected{{/ifEquals}}>SI1</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <textarea name="description" rows="4" required>{{product.description}}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <div class="mt-3 text-center">
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                    <a href="/auth/alldiamondproducts" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{>footer}}

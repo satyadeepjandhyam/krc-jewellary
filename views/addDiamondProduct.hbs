@@ -1,0 +1,136 @@
+{{>header}}
+<title>Add Diamond Product</title>
+<section class="content" style="background-color:white; color: black;">
+    <div class="container-fluid">
+        <div class="row"></div>
+
+    {{#if success}}
+    <div class="alert alert-success">{{success}}</div>
+    {{/if}}
+    {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+
+    <form action="/auth/creatediamondproduct" method="Post" enctype="multipart/form-data">
+        <!-- Product Details Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-white text-white">
+                <h5> Add Diamond Product Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Product Name -->
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Price -->
+                    <div class="col-md-6 mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Product Image -->
+                    <div class="col-md-6 mb-3">
+                        <label for="image" class="form-label">Product Image</label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                    </div>
+                </div>
+
+                <!-- Diamond Specific Fields -->
+                <div class="row">
+                    <!-- Diamond Quality -->
+                    <div class="col-md-6 mb-3">
+                        <label for="diamondQuality" class="form-label">Diamond Quality</label>
+                        <select class="form-control" id="diamondQuality" name="diamondQuality" required>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Very Good">Very Good</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                        </select>
+                    </div>
+                                        <!-- Metal -->
+                  
+                        <div class="col-md-6 mb-3">
+                            <label for="metal" class="form-label">Metal</label>
+                            <select class="form-control" id="metal" name="metal" required>
+                                <option value="Gold">Gold</option>
+                                <option value="Platinum">Platinum</option>
+                            </select>
+                        </div>
+                    
+
+
+                    <!-- Carat -->
+                    <div class="col-md-6 mb-3">
+                        <label for="carat" class="form-label">Carat</label>
+                        <input type="number" class="form-control" id="carat" name="carat" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Diamond Cut -->
+                    <div class="col-md-6 mb-3">
+                        <label for="cut" class="form-label">Diamond Cut</label>
+                        <select class="form-control" id="cut" name="cut" required>
+                            <option value="Round">Round</option>
+                            <option value="Princess">Princess</option>
+                            <option value="Emerald">Emerald</option>
+                            <option value="Asscher">Asscher</option>
+                            <option value="Cushion">Cushion</option>
+                            <option value="Oval">Oval</option>
+                        </select>
+                    </div>
+
+                    <!-- Diamond Color -->
+                    <div class="col-md-6 mb-3">
+                        <label for="color" class="form-label">Diamond Color</label>
+                        <select class="form-control" id="color" name="color" required>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Diamond Clarity -->
+                    <div class="col-md-6 mb-3">
+                        <label for="clarity" class="form-label">Diamond Clarity</label>
+                        <select class="form-control" id="clarity" name="clarity" required>
+                            <option value="IF">IF</option>
+                            <option value="VVS1">VVS1</option>
+                            <option value="VVS2">VVS2</option>
+                            <option value="VS1">VS1</option>
+                            <option value="VS2">VS2</option>
+                            <option value="SI1">SI1</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="description" class="form-label">Product Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mb-3">
+            <button type="submit" class="btn-submit">Add Diamond Product</button>
+             <a href="/auth/alldiamondproducts" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

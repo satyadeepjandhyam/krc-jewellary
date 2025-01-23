@@ -1,0 +1,215 @@
+{{>header}}
+<title>Dashboard</title>
+
+<div class="row p-3" style="margin: 0px !important;">
+    {{#if success}}
+    <div class="alert alert-success">{{success}}</div>
+    {{/if}}
+    {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:#4F3267; color:white;">
+            <div class="inner">
+                <h3>{{userCount}}</h3>
+                <h3><b>Users</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <a href="/auth/allusers" class="small-box-footer" >More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:white; color:#4F3267;">
+            <div class="inner">
+                <h3>{{goldRatesCount}}</h3>
+                <h3><b>GoldRates</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-bars-staggered"></i>
+            </div>
+            <a href="/auth/goldRates" class="small-box-footer" style="background-color:#4F3267;">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:#4F3267; color:white;">
+            <div class="inner">
+                <h3>{{productCount}}</h3>
+                <h3><b>Gold Products</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-coins"></i>
+            </div>
+            <a href="/auth/allproducts" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:white; color:#4F3267;">
+            <div class="inner">
+                <h3>{{silverRatesCount}}</h3>
+                <h3><b>SilverRates</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <a href="/auth/silverRates" class="small-box-footer" style="background-color:#4F3267;">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:white; color:#4F3267;">
+            <div class="inner">
+                <h3>{{silverProductCount}}</h3>
+                <h3><b>Silver Products</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-ring"></i>
+            </div>
+            <a href="/auth/allSilverProducts" class="small-box-footer" style="background-color:#4F3267;">More info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:#4F3267; color:white;">
+            <div class="inner">
+                <h3>{{contactUsCount}}</h3>
+                <h3><b>Contact Us</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <a href="/auth/getAllContactUs" class="small-box-footer" style="background-color:#4F3267;">More info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:white; color:#4F3267;">
+            <div class="inner">
+                <h3>{{bannerCount}}</h3>
+                <h3><b>Banners</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-image"></i>
+            </div>
+            <a href="/auth/allbanners" class="small-box-footer" style="background-color:#4F3267;">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:#4F3267; color:white;">
+            <div class="inner">
+                <h3>{{testimonialCount}}</h3>
+                <h3><b>Testimonials</b></h3>
+            </div>
+            <div class="icon">
+                <i class="fas fa-comments"></i>
+            </div>
+            <a href="/auth/allTestimonial" class="small-box-footer">More info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box" style="background-color:#4F3267; color:white;">
+            <div class="inner">
+                <h3>{{diamondProductCount}}</h3>
+                <h3><b>Diamond Products</h3></b>
+            </div>
+            <div class="icon">
+                <i class="fas fa-gem"></i>
+            </div>
+            <a href="/auth/alldiamondproducts" class="small-box-footer">More info <i
+                    class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box" style="background-color:white; color:#4F3267;">
+        <div class="inner" style="padding-top:50px;">
+            <h3>{{allSettings}}</h3>
+            <h3><b>Settings</b></h3>
+        </div>
+        <div class="icon">
+            <i class="fas fa-gears"></i>
+        </div>
+        <a href="/admin/settings" class="small-box-footer" style="background-color:#4F3267;">
+            More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+
+    <!-- Pie Chart Section -->
+    <div class="col-lg-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Product Distribution Pie Chart</h3>
+            </div>
+            <div class="card-body">
+                <!-- Set canvas size here -->
+                <canvas id="productPieChart"
+                    style="max-width: 400px; max-height: 400px; width: 100%; height: auto;"></canvas>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <!-- Footer Section -->
+    {{>footer}}
+    </body>
+
+    <!-- Include Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Pie chart setup
+        const productData = {
+            labels: ['Silver', 'Gold', 'Platinum'],
+            datasets: [{
+                data: [40, 30, 30],
+                backgroundColor: ['#c0c0c0', '#ffd700', '#e5e4e2'],
+                borderColor: '#fff',
+                borderWidth: 1
+            }]
+        };
+
+        // Get the canvas context
+        const ctx = document.getElementById('productPieChart').getContext('2d');
+
+        // Create the pie chart
+        new Chart(ctx, {
+            type: 'pie',
+            data: productData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + '%'; // Customize tooltip
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
+
+
+    </html>

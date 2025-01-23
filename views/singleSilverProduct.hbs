@@ -1,0 +1,420 @@
+{{> header}}
+<title>Product {{product.name}}</title>
+<section class="content" style="background-color:white; color: black;">
+    <div class="container-fluid">
+        <div class="row"></div>
+
+        <!-- Update Form -->
+        <form action="/auth/updateSilverProduct/{{product._id}}" method="POST" enctype="multipart/form-data">
+            <div class="card mb-4">
+                <div class="card-header bg-white text-white">
+                    <h5>Product : {{product.name}}</h5>
+                         <!-- Toast Notification Element -->
+        <div id="toast" class="toast">
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Existing Image Display -->
+                        <div class="col-md-6 mb-3">
+                            <label>Current Product Image</label><br>
+                            {{#if product.image}}
+                            <img src="/{{product.image}}" alt="Product Image" class="img-thumbnail"
+                                style="max-height: 150px;">
+                            {{else}}
+                            <p>No image available</p>
+                            {{/if}}
+                        </div>
+
+                        <!-- Update Image -->
+                        <div class="col-md-6 mb-3">
+                            <label for="productImage">Update Product Image</label>
+                            <input type="file" class="form-control" id="productImage" name="productImage"
+                                accept="image/*">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="name">Product Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{product.name}}"
+                                required>
+                        </div>
+                        <!-- Category Dropdown -->
+                        <div class="col-md-6 mb-3">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="category" name="category" required>
+                                <option value="Rings">Rings</option>
+                                <option value="Necklaces">Necklaces</option>
+                                <option value="Chains">Chains</option>
+                                <option value="Bracelets">Bracelets</option>
+                                <option value="Anklets">Anklets</option>
+                                <option value="Vaddanam">Vaddanam</option>
+                                <option value="Earrings">Earrings</option>
+                                <option value="Bangles">Bangles</option>
+                                <option value="Pendants">Pendants</option>
+                                <option value="Cufflinks">Cufflinks</option>
+                                <option value="Brooches">Brooches</option>
+                                <option value="Toe Rings">Toe Rings</option>
+                                <option value="Nose Pins">Nose Pins</option>
+                                <option value="Tiara">Tiara</option>
+                                <option value="Hair Accessories">Hair Accessories</option>
+                                <option value="Maang Tikka">Maang Tikka</option>
+                                <option value="Armlets">Armlets</option>
+                                <option value="Jewelry Sets">Jewelry Sets</option>
+                                <option value="Temple Jewelry">Temple Jewelry</option>
+                                <option value="Cocktail Rings">Cocktail Rings</option>
+                                <option value="Wedding Jewelry">Wedding Jewelry</option>
+                                <option value="Antique Jewelry">Antique Jewelry</option>
+                                <option value="Kada">Kada</option>
+                                <option value="Mangalsutra">Mangalsutra</option>
+                                <option value="Chokers">Chokers</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        {{!-- <div class="col-md-6 mb-3">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" id="price" name="price" value="{{product.price}}"
+                                style="cursor: not-allowed" readonly>
+                        </div> --}}
+                        <div class="col-md-6 mb-3">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description"
+                                name="description">{{product.description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metal Details Section -->
+            <div class="card mb-4">
+                <div class="card-header bg-white text-white">
+                    <h5>Metal Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Metal Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="metal">Metal</label>
+                            <input type="text" class="form-control" id="metal" name="details.metalDetails.metal"
+                                value="{{product.details.metalDetails.metal}}" style="cursor: not-allowed" readonly>
+                        </div>
+                        {{!--
+                        <!-- Karats Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="karats">Rate</label>
+                            <input type="text" class="form-control" id="rate" name="details.metalDetails.rate"
+                                value="{{product.details.metalDetails.rate}}">
+                        </div> --}}
+
+                        <!-- Weight Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="weight">Weight (grams)</label>
+                            <input type="text" class="form-control" id="weight" name="details.metalDetails.weight"
+                                value="{{product.details.metalDetails.weight}}">
+                        </div>
+
+                        {{!-- <!-- Gold Weight Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="goldWeight">SilverWeight (grams)</label>
+                            <input type="text" class="form-control" id="goldWeight"
+                                name="details.metalDetails.goldWeight"
+                                value="{{product.details.metalDetails.silverWeight}}">
+                        </div> --}}
+
+                        <!-- Stone Weight Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="stoneWeight">Stone Price</label>
+                            <input type="text" class="form-control" id="stonePrice"
+                                name="details.metalDetails.stonePrice"
+                                value="{{product.details.metalDetails.stonePrice}}">
+                        </div>
+
+                        <!-- Stone Weight Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="stoneWeight">Stone Weight (grams)</label>
+                            <input type="text" class="form-control" id="stoneWeight"
+                                name="details.metalDetails.stoneWeight"
+                                value="{{product.details.metalDetails.stoneWeight}}">
+                        </div>
+
+
+                        <!-- Making Charges Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="makingCharges">Making Charges ($)</label>
+                            <input type="number" class="form-control" id="makingCharges"
+                                name="details.metalDetails.makingCharges"
+                                value="{{product.details.metalDetails.makingCharges}}">
+                        </div>
+
+                        <!-- Subtotal Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="subtotal">Subtotal ($)</label>
+                            <input type="number" class="form-control" id="subtotal" name="details.metalDetails.subtotal"
+                                style="cursor: not-allowed" readonly value="{{product.details.metalDetails.subtotal}}">
+                        </div>
+
+                        <!-- GST Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="gst">GST ($)</label>
+                            <input type="number" class="form-control" id="gst" name="details.metalDetails.gst"
+                                value="{{product.details.metalDetails.gst}}">
+                        </div>
+
+                        <!-- Grand Total Input -->
+                        <div class="col-md-4 mb-3">
+                            <label for="grandTotal">Grand Total ($)</label>
+                            <input type="number" class="form-control" id="grandTotal"
+                                name="details.metalDetails.grandTotal"
+                                value="{{product.details.metalDetails.grandTotal}}" style="cursor: not-allowed"
+                                readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- General Details Section -->
+            <div class="card mb-4">
+                <div class="card-header bg-white text-white">
+                    <h5>General Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Jewellery Type Dropdown -->
+                        <div class="col-md-3 mb-3">
+                            <label for="jewelleryType">Jewellery Type</label>
+                            <select class="form-control" id="jewelleryType" name="details.generalDetails.jewelleryType" required>
+                                <option value="Rings">Rings</option>
+                                <option value="Necklaces">Necklaces</option>
+                                <option value="Chains">Chains</option>
+                                <option value="Bracelets">Bracelets</option>
+                                <option value="Anklets">Anklets</option>
+                                <option value="Vaddanam">Vaddanam</option>
+                                <option value="Earrings">Earrings</option>
+                                <option value="Bangles">Bangles</option>
+                                <option value="Pendants">Pendants</option>
+                                <option value="Cufflinks">Cufflinks</option>
+                                <option value="Brooches">Brooches</option>
+                                <option value="Toe Rings">Toe Rings</option>
+                                <option value="Nose Pins">Nose Pins</option>
+                                <option value="Tiara">Tiara</option>
+                                <option value="Hair Accessories">Hair Accessories</option>
+                                <option value="Maang Tikka">Maang Tikka</option>
+                                <option value="Armlets">Armlets</option>
+                                <option value="Jewelry Sets">Jewelry Sets</option>
+                                <option value="Temple Jewelry">Temple Jewelry</option>
+                                <option value="Cocktail Rings">Cocktail Rings</option>
+                                <option value="Wedding Jewelry">Wedding Jewelry</option>
+                                <option value="Antique Jewelry">Antique Jewelry</option>
+                                <option value="Kada">Kada</option>
+                                <option value="Mangalsutra">Mangalsutra</option>
+                                <option value="Chokers">Chokers</option>
+                            </select>
+                        </div>
+
+                        <!-- Gender Dropdown -->
+                        <div class="col-md-3 mb-3">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" id="gender" name="details.generalDetails.gender" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Unisex">Unisex</option>
+                            </select>
+                        </div>
+
+                        <!-- Collection Dropdown -->
+                        <div class="col-md-3 mb-3">
+                            <label for="collection">Collection</label>
+                            <select class="form-control" id="collection" name="details.generalDetails.collection"
+                                required>
+                                <option value="Royal">Royal</option>
+                                <option value="Classic">Classic</option>
+                                <option value="Luxury">Luxury</option>
+                                <option value="Platinum">Platinum</option>
+                                <option value="Ethnic">Ethnic</option>
+                                <option value="Heritage">Heritage</option>
+                                <option value="Minimalist">Minimalist</option>
+                            </select>
+                        </div>
+
+                        <!-- Occasion Dropdown -->
+                        <div class="col-md-3 mb-3">
+                            <label for="occasion">Occasion</label>
+                            <select class="form-control" id="occasion" name="details.generalDetails.occasion" required>
+                                <option value="Wedding">Wedding</option>
+                                <option value="Engagement">Engagement</option>
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Birthday">Birthday</option>
+                                <option value="Festive">Festive</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                    <a href="/auth/allproducts" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Show preference -->
+<script>
+    $(document).ready(function () {
+        $("input[data-bootstrap-switch]").each(function () {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+        $('.status').bootstrapSwitch('state');
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Initialize Bootstrap Switch for all checkboxes with data-bootstrap-switch attribute
+        $("input[data-bootstrap-switch]").bootstrapSwitch();
+        // Trigger the API call when the switch changes
+        $('.status').on('switchChange.bootstrapSwitch', function (event, state) {
+            // Get the vendor ID from the data attribute
+            var productId = $(this).data('product-id');
+            // 'state' is true if the switch is turned on, false if off
+            var isChecked = state;
+            // Prepare data for the API call
+            var data = {
+                topSeller: isChecked ? 'on' : 'off'  // Send 'on' if checked, 'off' if unchecked
+            };
+            // Send an AJAX request to the backend API
+            $.ajax({
+                url: `/auth/updateSilverProduct/${productId}`,  // Use the product ID in the URL
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    console.log("success");
+                    //alert('Status updated successfully');
+                },
+                error: function (xhr, status, error) {
+                    alert('Error updating status');
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    // Assuming you have the category value (e.g., from the backend or data)
+    const selectedCategory = "{{product.category}}"; // This will hold the current category value, e.g., "Rings"
+
+    // Find the dropdown element
+    const categoryDropdown = document.getElementById("category");
+
+    // Set the selected category
+    for (let i = 0; i < categoryDropdown.options.length; i++) {
+        if (categoryDropdown.options[i].value === selectedCategory) {
+            categoryDropdown.options[i].selected = true;
+            break;
+        }
+    }
+</script>
+
+<script>
+    // Assuming you have the jewelleryType value (e.g., from the backend or data)
+    const selectedJewelleryType = "{{product.details.generalDetails.jewelleryType}}"; // This will hold the current jewellery type value, e.g., "Rings"
+
+    // Find the dropdown element
+    const jewelleryTypeDropdown = document.getElementById("jewelleryType");
+
+    // Set the selected jewellery type
+    for (let i = 0; i < jewelleryTypeDropdown.options.length; i++) {
+        if (jewelleryTypeDropdown.options[i].value === selectedJewelleryType) {
+            jewelleryTypeDropdown.options[i].selected = true;
+            break;
+        }
+    }
+</script>
+
+<script>
+    // Assuming you have the gender value (e.g., from the backend or data)
+    const selectedGender = "{{product.details.generalDetails.gender}}"; // This will hold the current gender value, e.g., "Male"
+
+    // Find the dropdown element
+    const genderDropdown = document.getElementById("gender");
+
+    // Set the selected gender
+    for (let i = 0; i < genderDropdown.options.length; i++) {
+        if (genderDropdown.options[i].value === selectedGender) {
+            genderDropdown.options[i].selected = true;
+            break;
+        }
+    }
+</script>
+
+<script>
+    // Assuming you have the collection value (e.g., from the backend or data)
+    const selectedCollection = "{{product.details.generalDetails.collection}}"; // This will hold the current collection value, e.g., "Royal"
+
+    // Find the dropdown element
+    const collectionDropdown = document.getElementById("collection");
+
+    // Set the selected collection
+    for (let i = 0; i < collectionDropdown.options.length; i++) {
+        if (collectionDropdown.options[i].value === selectedCollection) {
+            collectionDropdown.options[i].selected = true;
+            break;
+        }
+    }
+</script>
+
+<script>
+    // Assuming you have the occasion value (e.g., from the backend or data)
+    const selectedOccasion = "{{product.details.generalDetails.occasion}}"; // This will hold the current occasion value, e.g., "Wedding"
+
+    // Find the dropdown element
+    const occasionDropdown = document.getElementById("occasion");
+
+    // Set the selected occasion
+    for (let i = 0; i < occasionDropdown.options.length; i++) {
+        if (occasionDropdown.options[i].value === selectedOccasion) {
+            occasionDropdown.options[i].selected = true;
+            break;
+        }
+    }
+</script>
+<script>
+
+// Show toast notifications
+    const success = '{{success}}';
+    const error = '{{error}}';
+
+    if (success) {
+        showToast(success, "success");
+    } else if (error) {
+        showToast(error, "error");
+    }
+
+    // Toast function
+    function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.className = 'toast show ' + (type === 'success' ? 'toast-success' : 'toast-error');
+        toast.textContent = message;
+
+        setTimeout(function () {
+            toast.className = toast.className.replace('show', '');
+            setTimeout(() => (toast.style.display = 'none'), 500); // Ensures the toast is hidden after fading out
+        }, 3000);
+    }
+</script>
+
+
+
+
+
+
+
+
+{{> footer}}

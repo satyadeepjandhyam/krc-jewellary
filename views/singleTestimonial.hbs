@@ -1,0 +1,86 @@
+{{> header}}
+
+<section class="content" style="background-color:white; color: white;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline mt-3" style="border-left: 2px solid black;">
+                    <div class="card-header" style="background-color: black; color: #e4e4eb;">
+                        <h4><b>Update Testimonial</b></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <form action="/auth/updateTestimonial/{{testimonial._id}}" method="POST">
+            <!-- Testimonial Details Section -->
+            <div class="card mb-4">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{testimonial.name}}"
+                                required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="rating">Rating</label>
+                            <input type="number" class="form-control" id="rating" name="rating" min="1" max="5"
+                                value="{{testimonial.rating}}" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description"
+                                required>{{testimonial.description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <button type="submit" class="btn btn-primary">Update Testimonial</button>
+                    <a href="/auth/getTestimonial" class="btn btn-secondary">Cancel</a>
+
+                </div>
+            </div>
+        </form>
+        <a href="/auth/allTestimonial">Back to All Testimonials</a>
+    </div>
+    </div>
+
+    {{> footer}}
+    <script>
+        $(document).ready(function () {
+            // Initialize Bootstrap Switch
+            $("input[data-bootstrap-switch]").bootstrapSwitch();
+
+            // Handle switch change for testimonial status
+            $('.status').on('switchChange.bootstrapSwitch', function (event, state) {
+                const testimonialId = $(this).data('testimonial-id'); // Get testimonial ID
+                const isChecked = state; // Get the switch state (on/off)
+
+                // Send the status change via AJAX
+                $.ajax({
+                    url: `/auth/updateTestimonial/${testimonialId}`, // Update URL for testimonials
+                    method: 'POST',
+                    data: { topSeller: isChecked ? 'on' : 'off' }, // Send status as 'on' or 'off'
+                    success: function (response) {
+                        alert('Status updated successfully');
+
+                        window.location.href = '/auth/allTestimonial'; // Adjust the URL according to your route
+                    },
+                    error: function () {
+                        alert('Error updating status');
+                    }
+                });
+            });
+        });
+    </script>
+

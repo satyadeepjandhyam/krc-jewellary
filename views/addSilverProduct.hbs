@@ -1,0 +1,304 @@
+{{> header}}
+<title>Add Silver Products</title>
+<section class="content" style="background-color:white; color: black;">
+    <div class="container-fluid">
+        <div class="row"></div>
+
+        <!-- Flash Messages -->
+        {{#if success}}
+        <div class="alert alert-success">{{success}}</div>
+        {{/if}}
+
+        {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+        {{/if}}
+
+        <form action="/auth/addSilverProduct" method="post" enctype="multipart/form-data">
+            <!-- Product Details Section -->
+            <div class="card mb-4">
+                <div class="card-header bg-white text-white">
+                    <h5> Add Silver Product Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Product Image -->
+                        <div class="col-md-6 mb-3">
+                            <label for="productImage">Product Image</label>
+                            <input type="file" class="form-control" id="productImage" name="productImage"
+                                accept="image/*" required>
+                        </div>
+
+                        <!-- Product Name -->
+                        <div class="col-md-6 mb-3">
+                            <label for="name">Product Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Category -->
+                        <div class="form-group">
+                            <label for="productCategory">Category</label>
+                            <select class="form-control" id="productCategory" name="category" required>
+                                <option value="Rings">Rings</option>
+                                <option value="Necklaces">Necklaces</option>
+                                <option value="Chains">Chains</option>
+                                <option value="Bracelets">Bracelets</option>
+                                <option value="Anklets">Anklets</option>
+                                <option value="Vaddanam">Vaddanam</option>
+                                <option value="Earrings">Earrings</option>
+                                <option value="Bangles">Bangles</option>
+                                <option value="Pendants">Pendants</option>
+                                <option value="Cufflinks">Cufflinks</option>
+                                <option value="Brooches">Brooches</option>
+                                <option value="Toe Rings">Toe Rings</option>
+                                <option value="Nose Pins">Nose Pins</option>
+                                <option value="Tiara">Tiara</option>
+                                <option value="Hair Accessories">Hair Accessories</option>
+                                <option value="Maang Tikka">Maang Tikka</option>
+                                <option value="Armlets">Armlets</option>
+                                <option value="Jewelry Sets">Jewelry Sets</option>
+                                <option value="Temple Jewelry">Temple Jewelry</option>
+                                <option value="Cocktail Rings">Cocktail Rings</option>
+                                <option value="Wedding Jewelry">Wedding Jewelry</option>
+                                <option value="Antique Jewelry">Antique Jewelry</option>
+                                <option value="Kada">Kada</option>
+                                <option value="Mangalsutra">Mangalsutra</option>
+                                <option value="Chokers">Chokers</option>
+                            </select>
+                        </div>
+
+                        {{!-- <!-- Price -->
+                        <div class="col-md-6 mb-3">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div> --}}
+                    </div>
+
+                    <div class="row">
+                        <!-- Description -->
+                        <div class="col-md-6 mb-3">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metal Details Section -->
+            <div class="card mb-4">
+                <div class="card-header bg-white text-white">
+                    <h5>Metal Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Metal Selection -->
+                        <div class="col-md-4 mb-3">
+                            <label for="metal">Metal</label>
+                            <select class="form-control" id="metal" name="details.metalDetails.metal" required>
+                                <option value="Silver" selected>Silver</option>
+                            </select>
+                        </div>
+{{!-- 
+                        <!-- Karats Selection -->
+                        <div class="col-md-4 mb-3">
+                            <label for="rate">Rate</label>
+                            <input type="number" class="form-control" id="rate" name="details.metalDetails.rate"
+                                required placeholder="Enter the rate" />
+                        </div> --}}
+
+
+                        <!-- Weight -->
+                        <div class="col-md-4 mb-3">
+                            <label for="weight">Weight</label>
+                            <small class="helper-text text-black">(Weight should be in grams only)</small>
+                            <input type="text" id="weight" name="details.metalDetails.weight"
+                                placeholder="Enter weight in grams" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Radio Buttons for Stones -->
+                        <div class="col-md-4 mb-3">
+                            <label>Are Stones Present?</label>
+                            <div>
+                                <input type="radio" id="stonesYes" name="stonesPresent" value="yes"
+                                    onclick="toggleStoneFields(true)">
+                                <label for="stonesYes">Yes</label>
+                                <input type="radio" id="stonesNo" name="stonesPresent" value="no"
+                                    onclick="toggleStoneFields(false)" checked>
+                                <label for="stonesNo">No</label>
+                            </div>
+                        </div>
+
+                        {{!-- <!-- Silver Weight -->
+                        <div class="col-md-4 mb-3" id="silverWeightField" style="display: none;">
+                            <label for="silverWeight">Silver Weight (grams)</label>
+                            <input type="text" id="silverWeight" name="details.metalDetails.silverWeight"
+                                placeholder="Enter silver weight in grams" >
+                        </div> --}}
+
+                        <!-- Stone Weight -->
+                        <div class="col-md-4 mb-3" id="stoneWeightField" style="display: none;">
+                            <label for="stoneWeight">Stone Weight (grams)</label>
+                            <input type="text" id="stoneWeight" name="details.metalDetails.stoneWeight"
+                                placeholder="Enter stone weight in grams">
+                        </div>
+
+                        <!-- Stone Price -->
+                        <div class="col-md-4 mb-3" id="stonePriceField" style="display: none;">
+                            <label for="stonePrice">Stone Price</label>
+                            <input type="text" id="stonePrice" name="details.metalDetails.stonePrice"
+                                placeholder="Enter stone price">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Making Charges -->
+                        <div class="col-md-4 mb-3">
+                            <label for="makingCharges">Making Charges ($)</label>
+                            <input type="number" id="makingCharges" name="details.metalDetails.makingCharges"
+                                placeholder="Enter making charges" required>
+                        </div>
+
+                        <!-- Subtotal -->
+                        <div class="col-md-4 mb-3">
+                            <label for="subtotal">Subtotal ($)</label>
+                            <input type="number" id="subtotal" name="details.metalDetails.subtotal"
+                                placeholder="Calculated subtotal" disabled>
+                        </div>
+
+                        <!-- GST -->
+                        <div class="col-md-4 mb-3">
+                            <label for="gst">GST ($)</label>
+                            <input type="number" id="gst" name="details.metalDetails.gst" placeholder="GST" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Grand Total -->
+                        <div class="col-md-4 mb-3">
+                            <label for="grandTotal">Grand Total ($)</label>
+                            <input type="number" id="grandTotal" name="details.metalDetails.grandTotal"
+                                placeholder="Calculated grand total" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- General Details Section -->
+            <div class="card mb-4">
+                <div class="card-header bg-white text-white">
+                    <h5>General Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="jewelleryType">Jewellery Type</label>
+                            <select class="form-control" id="jewelleryType" name="details.generalDetails.jewelleryType"
+                                required>
+                                <option value="Rings">Rings</option>
+                                <option value="Necklaces">Necklaces</option>
+                                <option value="Chains">Chains</option>
+                                <option value="Bracelets">Bracelets</option>
+                                <option value="Anklets">Anklets</option>
+                                <option value="Vaddanam">Vaddanam</option>
+                                <option value="Earrings">Earrings</option>
+                                <option value="Bangles">Bangles</option>
+                                <option value="Pendants">Pendants</option>
+                                <option value="Cufflinks">Cufflinks</option>
+                                <option value="Brooches">Brooches</option>
+                                <option value="Toe Rings">Toe Rings</option>
+                                <option value="Nose Pins">Nose Pins</option>
+                                <option value="Tiara">Tiara</option>
+                                <option value="Hair Accessories">Hair Accessories</option>
+                                <option value="Maang Tikka">Maang Tikka</option>
+                                <option value="Armlets">Armlets</option>
+                                <option value="Jewelry Sets">Jewelry Sets</option>
+                                <option value="Temple Jewelry">Temple Jewelry</option>
+                                <option value="Cocktail Rings">Cocktail Rings</option>
+                                <option value="Wedding Jewelry">Wedding Jewelry</option>
+                                <option value="Antique Jewelry">Antique Jewelry</option>
+                                <option value="Kada">Kada</option>
+                                <option value="Mangalsutra">Mangalsutra</option>
+                                <option value="Chokers">Chokers</option>
+                            </select>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="col-md-3 mb-3">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" id="gender" name="details.generalDetails.gender" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Unisex">Unisex</option>
+                            </select>
+                        </div>
+
+                        <!-- Collection -->
+                        <div class="col-md-3 mb-3">
+                            <label for="collection">Collection</label>
+                            <select class="form-control" id="collection" name="details.generalDetails.collection"
+                                required>
+                                <option value="Royal">Royal</option>
+                                <option value="Classic">Classic</option>
+                                <option value="Luxury">Luxury</option>
+                                <option value="Platinum">Platinum</option>
+                                <option value="Ethereal">Ethnic</option>
+                                <option value="Heritage">Heritage</option>
+                                <option value="Minimalist">Minimalist</option>
+                            </select>
+                        </div>
+
+                        <!-- Occasion -->
+                        <div class="col-md-3 mb-3">
+                            <label for="occasion">Occasion</label>
+                            <select class="form-control" id="occasion" name="details.generalDetails.occasion" required>
+                                <option value="Wedding">Wedding</option>
+                                <option value="Engagement">Engagement</option>
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Birthday">Birthday</option>
+                                <option value="Festive">Festive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                    <a href="/auth/allsilverproducts" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    function toggleStoneFields(show) {
+       
+        const stoneWeightField = document.getElementById('stoneWeightField');
+        const stonePriceField = document.getElementById('stonePriceField');
+        
+        if (show) {
+           
+            stoneWeightField.style.display = 'block';
+            stonePriceField.style.display = 'block';
+        } else {
+          
+            stoneWeightField.style.display = 'none';
+            stonePriceField.style.display = 'none';
+            
+
+            
+            document.getElementById('stoneWeight').value = '0';
+            document.getElementById('stonePrice').value = '0';
+        }
+    }
+</script>
+
+
+{{> footer}}

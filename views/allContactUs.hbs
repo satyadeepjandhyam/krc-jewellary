@@ -1,0 +1,84 @@
+{{> header}}
+<title>All Contact Us Messages</title>
+
+<style>
+    .table th, .table td {
+        text-align: left; 
+        vertical-align: middle; 
+    }
+
+    .table td {
+        word-wrap: break-word; 
+
+
+    .actions-btn {
+        text-decoration: none;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .actions-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .add-btn {
+        background-color: rgb(0, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 180px;
+        height: 40px;
+    }
+
+    .add-btn i {
+        margin-right: 5px;
+    }
+</style>
+
+<div class="row p-2" style="margin: 0px !important;">
+    <div class="col-md-12">
+        <div class="card mt-2" style="border-left: 2px solid black;">
+            
+            
+
+            <div class="card-header" style="background-color:black; color:white;">
+                <h4><b>All Contact Us Messages</b></h4>
+            </div>
+
+            <div class="card-body p-2">
+                
+
+                    <div class="col-sm-12 table-responsive">
+                        <table id="example2" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Send Date</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each messages}}
+                                <tr>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.email}}</td>
+                                    <td>{{this.subject}}</td>
+                                    <td>{{this.message}}</td>
+                                    <td>{{DateTime this.createdAt}}</td>
+                                    
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,174 @@
+{{>header}}
+<title>All Silver Products</title>
+<style>
+    .picture-column {
+        width: 120px;
+    }
+
+    .table-image {
+        width: 150px;
+        height: auto;
+    
+    }
+</style>
+<div class="row p-2" style="margin: 0px !important;">
+    <div class="col-md-12">
+        <div class="card mt-2" style="border-left: 2px solid black;">
+
+            <div class="card-header" style="background-color:black; color:white;">
+                <h4><b>ALL QUIZZES</b></h4>
+                <!-- Toast Notification Element -->
+                <div id="toast" class="toast">
+                </div>
+
+                <div class="card-body p-2">
+                    <div id="example1_wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ol class="float-sm-right">
+                                    <a href="/auth/addSilverProduct"
+                                        style="background-color: rgb(0, 0, 0); color:white; border:none; border-radius:5px; width: 180px; height: 40px; text-decoration: none; display: inline-block; text-align: center; line-height: 40px;">
+                                        <i class="fa-solid fa-plus"></i> Add Quizz
+                                    </a>
+                                </ol>
+                            </div>
+                            <div class="col-sm-12 table-responsive">
+                                <table id="example2" class="table table-bordered table-striped"
+                                    aria-describedby="example1_info">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th></th>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                            <th>Description</th>
+                                            <th>Metal</th>
+                                            <th>Weight (grms only)</th>
+                                            <th>Stone Weight</th>
+                                            <th>Stone Price</th>
+                                            <th>Making Charges</th>
+                                            <th>Subtotal</th>
+                                            <th>GST</th>
+                                            <th>Grand Total</th>
+                                            <th>Jewellery Type</th>
+                                            <th>Gender</th>
+                                            <th>Collection</th>
+                                            <th>Occasion</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each products}}
+                                        <tr>
+                                            <td>{{inc @index}}</td>
+                                            <td><img src="../{{image}}" class="table-image" alt="image"></td>
+                                            <td>{{this.name}}</td>
+                                            <td>{{this.category}}</td>
+                                            <td>{{this.description}}</td>
+                                            <td>{{this.details.metalDetails.metal}}</td>
+                                            <td>{{this.details.metalDetails.weight}}</td>
+                                            <td>{{#if
+                                                this.details.metalDetails.stoneWeight}}{{this.details.metalDetails.stoneWeight}}{{else}}No Stones Present{{/if}}
+                                            </td>
+                                            <td>{{#if
+                                                this.details.metalDetails.stonePrice}}{{this.details.metalDetails.stonePrice}}{{else}}No Stones Present{{/if}}
+                                            </td>
+
+                                            <td>₹{{this.details.metalDetails.makingCharges}}</td>
+                                            <td>₹{{this.details.metalDetails.subtotal}}</td>
+                                            <td>₹{{this.details.metalDetails.gst}}</td>
+                                            <td>₹{{this.details.metalDetails.grandTotal}}</td>
+                                            <td>{{this.details.generalDetails.jewelleryType}}</td>
+                                            <td>{{this.details.generalDetails.gender}}</td>
+                                            <td>{{this.details.generalDetails.collection}}</td>
+                                            <td>{{this.details.generalDetails.occasion}}</td>
+                                            <td>
+                                                <div class="eye d-flex justify-content-center">
+                                                    <a href="/auth/singlesilverproduct/{{this._id}}"
+                                                        class="btn btn-md btn-info m-1">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <button class="btn btn-md btn-danger m-1 delete-btn"
+                                                        data-id="{{this._id}}" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Silver Product Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Silver Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this product?
+                </div>
+                <div class="modal-footer">
+                    <form id="deleteForm" method="POST">
+                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{>footer}}
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            if (!$.fn.DataTable.isDataTable('#example2')) {
+                $('#example2').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                });
+            }
+
+            // Pass product ID to the delete modal
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const productId = button.getAttribute('data-id');
+                const deleteForm = document.getElementById('deleteForm');
+                deleteForm.action = `/auth/deleteSilverProduct/${productId}`;
+            });
+        });
+
+        const success = '{{success}}';
+        const error = '{{error}}';
+
+        if (success && success.trim() !== '') {
+            showToast(success, "success");
+        } else if (error && error.trim() !== '') {
+            showToast(error, "error");
+        }
+
+        // Show toast function
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.className = 'toast show ' + (type === 'success' ? 'toast-success' : 'toast-error');
+            toast.textContent = message;
+
+            setTimeout(function () {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+
+    </script>

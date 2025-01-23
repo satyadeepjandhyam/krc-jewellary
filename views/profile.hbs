@@ -1,0 +1,114 @@
+{{> header}}
+<title>Profile</title>
+{{!-- <div class="alert-success">{{success}}</div>
+<div class="alert-danger">{{error}}</div> --}}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row pb-2 pr-2 pl-2">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline mt-3">
+                    <div class="card-header" style="background-color: #4F3267; color:white;">
+                        <h4><b>ADMIN PROFILE</b></h4>
+                         <div id="toast" class="toast"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="card card-primary card-outline" style="border-left: 2px solid black;">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="img-fluid" src="/{{userExists.profilePicture}}" alt="Profile picture"
+                                onerror="this.onerror=null;this.src='/admin/images/dummy.png'">
+                        </div><br>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b> Name</b>
+                                <p class="float-right">
+                                    {{userExists.name}}
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Email</b>
+                                <p class="float-right">
+                                    {{userExists.email}}
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Mobile</b>
+                                <p class="float-right">
+                                    {{userExists.phoneNo}}
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Admin</b>
+                                <p class="float-right">
+                                    {{userExists.isAdmin}}
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Joined At</b>
+                                <p class="float-right">
+                                    <b>{{DateTime userExists.createdAt}}</b>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body" style="display: block;">
+                        <form action="/auth/updateprofile/{{userExists._id}}" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" name="name" value="{{userExists.name}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                        <input type="text" class="form-control" name="email" value="{{userExists.email}}"
+                                            oninput="this.value = this.value.toLowerCase()">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Mobile</label>
+                                        <input type="text" class="form-control" name="phoneNo" pattern="[0-9]{10}" maxlength="10"
+                                            title="Please enter exactly 10 numbers" oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                            value="{{userExists.phoneNo}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning col-md-4 offset-md-4 btn-block d-flex justify-content-center">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{> footer}}
+
+<script>
+    const success = '{{success}}';
+    const error = '{{error}}';
+    if (success) {
+        showToast(success, "success");
+    } else if (error) {
+        showToast(error, "error"); // Corrected function name
+    }
+
+    // Function to show toast
+    function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.className = 'toast show ' + (type === 'success' ? 'toast-success' : 'toast-error');
+        toast.textContent = message;
+
+        setTimeout(function () {
+            toast.className = toast.className.replace('show', '');
+        }, 3000);
+    }
+</script>

@@ -1,0 +1,58 @@
+{{>header}}
+<title>All Users</title>
+<div class="row p-2" style="margin: 0px !important;">
+  <div class="col-md-12">
+    <div class="card mt-2" style="border-left: 2px solid black;">
+      <div class="alert-success">{{success}}</div>
+      <div class="alert-danger">{{error}}</div>
+      <div class="card-header" style="background-color:black; color:white;">
+        <h4><b>ALL USERS</b></h4>
+      </div>
+      <div class="card-body p-2">
+        <div id="example1_wrapper">
+          <div class="row">
+            <div class="col-sm-12 table-responsive">
+              <table id="example2" aria-describedby="example1_info">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each allUsers}}
+                  <tr>
+                    <td>{{inc @index}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.phoneNo}}</td>
+               
+                    
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{>footer}}
+</body>
+<script>
+  $(document).ready(function () {
+    if (!$.fn.DataTable.isDataTable('#example2')) {
+      $('#example2').addClass('table table-bordered table-striped').DataTable({
+        "paging": true,
+      });
+    }
+  });
+</script>
+
+</html>
