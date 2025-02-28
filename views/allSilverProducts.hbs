@@ -16,7 +16,7 @@
         <div class="card mt-2" style="border-left: 2px solid black;">
 
             <div class="card-header" style="background-color:black; color:white;">
-                <h4><b>ALL QUIZZES</b></h4>
+                <h4><b>SILVER PRODUCTS</b></h4>
                 <!-- Toast Notification Element -->
                 <div id="toast" class="toast">
                 </div>
@@ -61,7 +61,7 @@
                                         {{#each products}}
                                         <tr>
                                             <td>{{inc @index}}</td>
-                                            <td><img src="../{{image}}" class="table-image" alt="image"></td>
+                                            <td><img src="{{image}}" class="table-image" alt="image"></td>
                                             <td>{{this.name}}</td>
                                             <td>{{this.category}}</td>
                                             <td>{{this.description}}</td>

@@ -44,6 +44,7 @@ module.exports = {
 
     addProductPage: (req, res) => {
         try {
+
             return res.render("addProduct", {
                 success: req.flash("success"),
                 error: req.flash("error"),
@@ -208,13 +209,14 @@ module.exports = {
                 'details.metalDetails.stoneWeight': stoneWeight,
                 'details.metalDetails.stonePrice': stonePrice,
                 'details.metalDetails.makingCharges': makingCharges,
-                'details.metalDetails.gst': gst,
+                // 'details.metalDetails.gst': gst,
                 'details.generalDetails.jewelleryType': jewelleryType,
                 'details.generalDetails.gender': gender,
                 'details.generalDetails.collection': collection,
                 'details.generalDetails.occasion': occasion,
             } = req.body;
 
+            console.log("kgygyug",req.body)
             const goldRate = await GoldRate.findOne().sort({ date: -1 });
             if (!goldRate) {
                 req.flash("error", "Unable to fetch gold rates");
@@ -282,10 +284,10 @@ module.exports = {
             console.log("Subtotal:", subtotal);
 
             // Parse GST and calculate grand total
-            const parsedGst = parseFloat(gst) || 0;
-            console.log("Parsed GST:", parsedGst);
+            // const parsedGst = parseFloat(gst) || 0;
+            // console.log("Parsed GST:", parsedGst);
 
-            const grandTotal = subtotal + parsedGst;
+            const grandTotal = subtotal  * 0.13;
             console.log("Grand Total:", grandTotal);
 
 
