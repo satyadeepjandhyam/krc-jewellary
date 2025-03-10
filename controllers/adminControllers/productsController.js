@@ -116,8 +116,7 @@ module.exports = {
             const parsedStoneWeight = parseFloat(stoneWeight);
             const parsedStonePrice = parseFloat(stonePrice) || 0;
             const parsedMakingCharges = parseFloat(makingCharges) || 0;
-            const parsedGst = parseFloat(gst) || 0;
-    
+        
           
             let karatRate;
     
@@ -149,7 +148,7 @@ module.exports = {
             } else if (karats === "18k") {
                 calculatedStonePrice = parsedStoneWeight * goldRate.rate18Carat;
             } else {
-                calculatedStonePrice = 0; // Default to 0 if karats are invalid
+                calculatedStonePrice = 0; 
             }
     
             console.log("Calculated Stone Price:", calculatedStonePrice);
@@ -158,7 +157,6 @@ module.exports = {
             let subtotal = karatRate - calculatedStonePrice + parsedStonePrice + parsedMakingCharges;
             console.log("Subtotal:", subtotal);
     
-            // Calculate grand total
             let  grandTotal = subtotal + parsedGst;
             console.log("Grand Total:", grandTotal);
     
@@ -232,7 +230,7 @@ module.exports = {
             let calculatedPrice;
             let karatRate;
 
-            // Calculate the karat rate based on gold type
+        
             if (karats === "22k") {
                 karatRate = goldRate.rate22Carat * parsedWeight;
             } else if (karats === "24k") {
@@ -272,24 +270,22 @@ module.exports = {
             }
             console.log("Calculated Stone Price:", calculatedStonePrice);
 
-            // Parse additional fields
+        
             const parsedStonePrice = parseFloat(stonePrice) || 0;
             const parsedMakingCharges = parseFloat(makingCharges) || 0;
 
             console.log("Parsed Stone Price:", parsedStonePrice);
             console.log("Parsed Making Charges:", parsedMakingCharges);
 
-            // Calculate subtotal
+         
             const subtotal = calculatedPrice - calculatedStonePrice + parsedStonePrice + parsedMakingCharges;
             console.log("Subtotal:", subtotal);
 
-            // Parse GST and calculate grand total
-            // const parsedGst = parseFloat(gst) || 0;
-            // console.log("Parsed GST:", parsedGst);
+            const gstAmount = subtotal * 0.18; 
+            console.log("GST (13%):", gstAmount);
 
-            const grandTotal = subtotal  * 0.13;
+            const grandTotal = subtotal + gstAmount;
             console.log("Grand Total:", grandTotal);
-
 
             const image = req.files ? req.files.productImage : null;
             if (!image) {
@@ -314,7 +310,7 @@ module.exports = {
                         stonePrice,
                         makingCharges,
                         subtotal,
-                        gst: parsedGst,
+                        gst: gstAmount,
                         grandTotal,
                     },
                     generalDetails: {
